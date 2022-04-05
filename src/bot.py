@@ -48,16 +48,18 @@ async def startserver(ctx):
   try:
     print("Starting instace")
     response = ec2.start_instances(InstanceIds=[instance_id], DryRun=False)
+    print(response)
+    await ctx.send("Start command issued, monitoring instance status")
 
     statusResponse = await checkServerStatus()
     count = 0
-    while((statusResponse != 'Running') and (count != 5)):
+    while((statusResponse != 'Running') and (count != 10)):
+      print("Instance is " + statusResponse)
       time.sleep(5)
       statusResponse = await checkServerStatus()
       count += 1
 
-    print(response)
-    await ctx.send("Started Instance")
+    await ctx.send("Instance is " + statusResponse)
   except ClientError as e:
     print(e)
     await ctx.send("Error Starting Instance")
