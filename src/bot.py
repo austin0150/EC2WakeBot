@@ -53,7 +53,7 @@ async def startserver(ctx):
 
     statusResponse = await checkServerStatus()
     count = 0
-    while((statusResponse != 'Running') and (count != 10)):
+    while((statusResponse != 'running') and (count != 10)):
       print("Instance is " + statusResponse)
       time.sleep(5)
       statusResponse = await checkServerStatus()
